@@ -15,7 +15,7 @@ const truraUpdate = () => {
         method: "GET",
     }).then((response) => response.json())
         .then((json) => {
-            $truraValue.dataset.value = json.candles[0].data[1][1].toFixed(2);
+            $truraValue.dataset.value = json.candles[0].data[1][1].toFixed(4);
             truraUpdate();
         }).catch(e => {
         $truraValue.dataset.value = 'ВСЕ СЛОМАЛОСЬ!';
