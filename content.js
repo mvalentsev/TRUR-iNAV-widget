@@ -1,5 +1,5 @@
 const url = 'https://iss.moex.com/iss/engines/stock/markets/index/securities/TRURA.json?iss.meta=off&iss.only=marketdata&marketdata.columns=CURRENTVALUE';
-const delay = 250;
+const delay = 500;
 let $truraValue;
 
 const delayFetch = (url, options) =>
