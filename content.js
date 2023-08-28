@@ -1,5 +1,5 @@
-const url = 'https://iss.moex.com/cs/engines/stock/markets/index/boardgroups/104/securities/TRURA.hs?candles=2';
-const delay = 1000;
+const url = 'https://iss.moex.com/iss/engines/stock/markets/index/securities/TRURA.json?iss.meta=off&iss.only=marketdata&marketdata.columns=CURRENTVALUE';
+const delay = 250;
 let $truraValue;
 
 const delayFetch = (url, options) =>
@@ -9,16 +9,15 @@ const delayFetch = (url, options) =>
         }, options.delay);
     });
 
-const truraUpdate = () => {
-    delayFetch(url + '&_=' + Math.random(), {
+const truraUpdate = (value) => {
+    $truraValue.dataset.value = value || 'Н/Д';
+    delayFetch(url, {
         delay: delay,
         method: "GET",
     }).then((response) => response.json())
         .then((json) => {
-            $truraValue.dataset.value = json.candles[0].data[1][1].toFixed(4);
-            truraUpdate();
+            truraUpdate(json.marketdata.data[0][0].toFixed(4));
         }).catch(e => {
-        $truraValue.dataset.value = 'ВСЕ СЛОМАЛОСЬ!';
         truraUpdate();
     })
 }
@@ -26,7 +25,7 @@ const truraUpdate = () => {
 const observer = new MutationObserver(function (mutations, mutationInstance) {
     const $insertAfter = document.querySelector('#marquee-search');
     if ($insertAfter) {
-        $insertAfter.insertAdjacentHTML('beforebegin', '<div id="trur-inav-widget" data-value="0.0000">TRURA:&nbsp;</div>');
+        $insertAfter.insertAdjacentHTML('beforebegin', '<div id="trur-inav-widget">TRURA:&nbsp;</div>');
         $truraValue = document.querySelector('#trur-inav-widget');
         truraUpdate();
         mutationInstance.disconnect()
