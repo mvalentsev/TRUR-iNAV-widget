@@ -1,6 +1,6 @@
 # TRUR iNAV Widget
 
-Расширение для Google Chrome. Добавляет в Терминал Тинькофф текущее значение расчетной цены (iNAV) для TRUR.
+Расширение для Google Chrome. Добавляет в Терминал Т-Инвестиций текущее значение расчетной цены (iNAV) для TRUR.
 
 Дальше все тут: https://github.com/mvalentsev/MOEX-iNAV-Widget
 
